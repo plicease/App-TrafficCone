@@ -1,0 +1,54 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+use File::Spec;
+use File::HomeDir;
+use YAML qw( LoadFile DumpFile );
+
+# PODNAME: traffic_cone
+# ABSTRACT: Web server that just returns 503 Service unavailable
+our $VERSION = '0.01'; # VERSION
+
+my $config = do {
+  my $config_file_name = File::Spec->catfile(File::HomeDir->my_home, '.traffic_cone.yml');
+  unless(-e $config_file_name)
+  {
+    DumpFile($config_file_name, {
+      listen => 'http://*:3000',
+      message => '503 Site down for maintenance',
+    });
+  }
+  LoadFile($config_file_name);
+};
+
+local $ENV{TRAFFIC_CONE} = $config->{message};
+local @ARGV = ('daemon', -l => $config->{listen});
+
+require Mojolicious::Commands;
+Mojolicious::Commands->start_app('App::TrafficCone');
+
+__END__
+
+=pod
+
+=head1 NAME
+
+traffic_cone - Web server that just returns 503 Service unavailable
+
+=head1 VERSION
+
+version 0.01
+
+=head1 AUTHOR
+
+Graham Ollis <plicease@cpan.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2013 by Graham Ollis.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+=cut
