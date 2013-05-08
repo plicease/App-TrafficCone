@@ -19,9 +19,9 @@ sub startup
   $self->routes->any('/*x' => { x => 'y' } => sub {
     my $self = shift;
     $self->render(
-      text => $ENV{TRAFFIC_CONE},
+      text   => $ENV{TRAFFIC_CONE},
+      status => 503,
     );
-    $self->res->code(503);
   });
   
   return;

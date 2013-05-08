@@ -1,0 +1,15 @@
+#!/usr/bin/perl
+
+use Mojolicious::Lite;
+
+$ENV{TRAFFIC_CONE} //= '503 Site down for maintenance';
+
+any '/*x' => { x => 'y' } => sub {
+  my $self = shift;
+  $self->render(
+    text => $ENV{TRAFFIC_CONE},
+    status => 503,
+  );
+};
+
+app->start;
