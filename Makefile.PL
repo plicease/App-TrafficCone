@@ -11,14 +11,9 @@ use ExtUtils::MakeMaker 6.30;
 my %WriteMakefileArgs = (
   "ABSTRACT" => "Web server that just returns 503 Service unavailable",
   "AUTHOR" => "Graham Ollis <plicease\@cpan.org>",
-  "BUILD_REQUIRES" => {
-    "Module::Build" => "0.3601",
-    "Test::Mojo" => 0,
-    "Test::More" => 0
-  },
+  "BUILD_REQUIRES" => {},
   "CONFIGURE_REQUIRES" => {
-    "ExtUtils::MakeMaker" => "6.30",
-    "Module::Build" => "0.3601"
+    "ExtUtils::MakeMaker" => "6.30"
   },
   "DISTNAME" => "App-TrafficCone",
   "EXE_FILES" => [
@@ -30,17 +25,35 @@ my %WriteMakefileArgs = (
     "File::HomeDir" => 0,
     "File::Spec" => 0,
     "Mojo::Base" => 0,
+    "Mojo::URL" => 0,
     "Mojolicious::Commands" => 0,
     "YAML" => 0,
     "strict" => 0,
     "warnings" => 0
   },
-  "VERSION" => "0.01",
+  "TEST_REQUIRES" => {
+    "Test::Mojo" => 0,
+    "Test::More" => 0
+  },
+  "VERSION" => "0.02",
   "test" => {
     "TESTS" => "t/*.t"
   }
 );
 
+
+unless ( eval { ExtUtils::MakeMaker->VERSION(6.63_03) } ) {
+  my $tr = delete $WriteMakefileArgs{TEST_REQUIRES};
+  my $br = $WriteMakefileArgs{BUILD_REQUIRES};
+  for my $mod ( keys %$tr ) {
+    if ( exists $br->{$mod} ) {
+      $br->{$mod} = $tr->{$mod} if $tr->{$mod} > $br->{$mod};
+    }
+    else {
+      $br->{$mod} = $tr->{$mod};
+    }
+  }
+}
 
 unless ( eval { ExtUtils::MakeMaker->VERSION(6.56) } ) {
   my $br = delete $WriteMakefileArgs{BUILD_REQUIRES};

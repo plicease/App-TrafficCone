@@ -5,10 +5,11 @@ use warnings;
 use File::Spec;
 use File::HomeDir;
 use YAML qw( LoadFile DumpFile );
+use Mojo::URL;
 
 # PODNAME: traffic_cone
 # ABSTRACT: Web server that just returns 503 Service unavailable
-our $VERSION = '0.01'; # VERSION
+our $VERSION = '0.02'; # VERSION
 
 my $config = do {
   my $config_file_name = File::Spec->catfile(File::HomeDir->my_home, '.traffic_cone.yml');
@@ -23,7 +24,16 @@ my $config = do {
 };
 
 local $ENV{TRAFFIC_CONE} = $config->{message};
-local @ARGV = ('daemon', -l => $config->{listen});
+local $ENV{MOJO_LISTEN}  = do {
+  my $url = Mojo::URL->new($config->{listen});
+  for qw( ca cert key verify ) {
+    $url->query->param( $_ => $config->{"ssl_$_"} )
+      if defined $config->{"ssl_$_"};
+  }
+  $url->to_string;
+};
+
+@ARGV = qw( daemon ) unless @ARGV > 0;
 
 require Mojolicious::Commands;
 Mojolicious::Commands->start_app('App::TrafficCone');
@@ -38,7 +48,7 @@ traffic_cone - Web server that just returns 503 Service unavailable
 
 =head1 VERSION
 
-version 0.01
+version 0.02
 
 =head1 AUTHOR
 
