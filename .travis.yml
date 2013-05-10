@@ -1,0 +1,11 @@
+language: perl
+install:
+  - cpanm -n Mojolicious
+  - cpanm -n File::HomeDir
+  - cpanm -n YAML
+script: HARNESS_IS_VERBOSE=1 prove -lvr t
+perl:
+  - "5.16"
+  - "5.14"
+  - "5.12"
+  - "5.10"
