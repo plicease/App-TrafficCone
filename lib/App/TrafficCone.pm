@@ -6,7 +6,7 @@ use v5.10;
 use Mojo::Base qw( Mojolicious );
 
 # ABSTRACT: Web server that just returns 503 Service unavailable
-our $VERSION = '0.02'; # VERSION
+our $VERSION = '0.03'; # VERSION
 
 sub startup
 {
@@ -39,7 +39,7 @@ App::TrafficCone - Web server that just returns 503 Service unavailable
 
 =head1 VERSION
 
-version 0.02
+version 0.03
 
 =head1 AUTHOR
 
