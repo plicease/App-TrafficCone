@@ -26,7 +26,7 @@ my $config = do {
 local $ENV{TRAFFIC_CONE} = $config->{message};
 local $ENV{MOJO_LISTEN}  = do {
   my $url = Mojo::URL->new($config->{listen});
-  for qw( ca cert key verify ) {
+  for (qw( ca cert key verify )) {
     $url->query->param( $_ => $config->{"ssl_$_"} )
       if defined $config->{"ssl_$_"};
   }
