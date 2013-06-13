@@ -1,6 +1,7 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+  - fix syntax error (on most versions of perl)
 
 0.03      2013-06-07 15:07:47 EST5EDT
   - upload to matrix after release
