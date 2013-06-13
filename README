@@ -2,7 +2,7 @@ NAME
     App::TrafficCone - Web server that just returns 503 Service unavailable
 
 VERSION
-    version 0.02
+    version 0.04
 
 AUTHOR
     Graham Ollis <plicease@cpan.org>

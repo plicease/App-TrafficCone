@@ -6,7 +6,7 @@ use v5.10;
 use Mojo::Base qw( Mojolicious );
 
 # ABSTRACT: Web server that just returns 503 Service unavailable
-our $VERSION = '0.02'; # VERSION
+our $VERSION = '0.04'; # VERSION
 
 sub startup
 {
@@ -30,7 +30,6 @@ sub startup
 1;
 
 __END__
-
 =pod
 
 =head1 NAME
@@ -39,7 +38,7 @@ App::TrafficCone - Web server that just returns 503 Service unavailable
 
 =head1 VERSION
 
-version 0.02
+version 0.04
 
 =head1 AUTHOR
 
@@ -53,3 +52,4 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
+

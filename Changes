@@ -1,6 +1,13 @@
 Revision history for App-TrafficCone
 
+0.04      2013-06-13 11:19:03 America/New_York
+  - fix syntax error (on most versions of perl)
+
+0.03      2013-06-07 15:07:47 EST5EDT
+  - upload to matrix after release
+
 0.02      2013-05-10 08:51:51 EST5EDT
+  - support options for ssl
 
 0.01      2013-02-19 13:32:26 America/New_York
   - initial version
