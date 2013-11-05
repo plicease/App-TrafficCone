@@ -10,7 +10,7 @@ use Mojo::Base qw( Mojolicious );
 
 sub startup
 {
-  my($self, $config) = @_;
+  my($self) = @_;
   
   $self->secret(rand);
 
