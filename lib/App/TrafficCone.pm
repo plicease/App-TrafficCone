@@ -6,13 +6,20 @@ use v5.10;
 use Mojo::Base qw( Mojolicious );
 
 # ABSTRACT: Web server that just returns 503 Service unavailable
-our $VERSION = '0.04'; # VERSION
+our $VERSION = '0.05'; # VERSION
 
 sub startup
 {
-  my($self, $config) = @_;
+  my($self) = @_;
   
-  $self->secret(rand);
+  if($self->can('secrets'))
+  {
+    $self->secrets([rand]);
+  }
+  else
+  {
+    $self->secret(rand);
+  }
 
   $ENV{TRAFFIC_CONE} //= '503 Site down for maintenance';
 
@@ -38,7 +45,7 @@ App::TrafficCone - Web server that just returns 503 Service unavailable
 
 =head1 VERSION
 
-version 0.04
+version 0.05
 
 =head1 AUTHOR
 
