@@ -12,7 +12,14 @@ sub startup
 {
   my($self) = @_;
   
-  $self->secrets([rand]);
+  if($self->can('secrets'))
+  {
+    $self->secrets([rand]);
+  }
+  else
+  {
+    $self->secret(rand);
+  }
 
   $ENV{TRAFFIC_CONE} //= '503 Site down for maintenance';
 
