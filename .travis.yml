@@ -1,9 +1,14 @@
 language: perl
+
 install:
+  - cpanm -n Dist::Zilla
+  - dzil authordeps --missing | cpanm -n
   - cpanm -n Mojolicious
   - cpanm -n File::HomeDir
   - cpanm -n YAML
-script: HARNESS_IS_VERBOSE=1 prove -lvr t
+
+script: dzil test -v
+
 perl:
   - "5.19"
   - "5.18"
