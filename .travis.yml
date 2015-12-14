@@ -1,16 +1,17 @@
 language: perl
+sudo: false
 
 install:
-  - cpanm -n Dist::Zilla
+  - perlbrew list
   - dzil authordeps --missing | cpanm -n
-  - cpanm -n Mojolicious
-  - cpanm -n File::HomeDir
-  - cpanm -n YAML
+  - dzil listdeps --missing | cpanm -n
 
-script: dzil test -v
+script:
+  - dzil test -v
 
 perl:
-  - "5.19"
+  - "5.22"
+  - "5.20"
   - "5.18"
   - "5.16"
   - "5.14"
