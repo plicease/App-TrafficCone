@@ -2,7 +2,7 @@ package App::TrafficCone;
 
 use strict;
 use warnings;
-use v5.10;
+use 5.010;
 use Mojo::Base qw( Mojolicious );
 
 # ABSTRACT: Web server that just returns 503 Service unavailable
