@@ -3,7 +3,7 @@
 use strict;
 use warnings;
 use File::Spec;
-use File::HomeDir;
+use File::Glob qw( bsd_glob );
 use YAML qw( LoadFile DumpFile );
 use Mojo::URL;
 
@@ -12,7 +12,7 @@ use Mojo::URL;
 # VERSION
 
 my $config = do {
-  my $config_file_name = File::Spec->catfile(File::HomeDir->my_home, '.traffic_cone.yml');
+  my $config_file_name = bsd_glob('~/.traffic_cone.yml');
   unless(-e $config_file_name)
   {
     DumpFile($config_file_name, {

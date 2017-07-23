@@ -4,7 +4,7 @@ Web server that just returns 503 Service unavailable
 
 # AUTHOR
 
-Graham Ollis &lt;plicease@cpan.org>
+Graham Ollis <plicease@cpan.org>
 
 # COPYRIGHT AND LICENSE
 
